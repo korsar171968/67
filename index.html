@@ -1,0 +1,1203 @@
+<!-- БЛОК 1: ШКОЛЬНЫЙ ПОРТАЛ -->
+<section id="school-start" style="position: relative; width: 100%; min-height: 100vh; background: #2c3e50; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; user-select: none;">
+    
+    <!-- 1. ШАПКА САЙТА (ЧТОБЫ БЫЛО ПОНЯТНО, ЧТО ЭТО ШКОЛА) -->
+    <header style="width: 100%; max-width: 1000px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid rgba(212, 175, 55, 0.3); padding-bottom: 15px; margin-bottom: 40px;">
+        <div style="color: #d4af37; font-weight: bold; letter-spacing: 2px; font-size: 14px;">ГБОУ МЛАДШАЯ ШКОЛА №73</div>
+        <div style="color: #fff; font-size: 12px; opacity: 0.6;">УЧЕБНЫЙ ПОРТАЛ / КЛАСС 4 "1"</div>
+    </header>
+
+    <!-- 2. ИСТОРИЯ И ЗАГОЛОВОК -->
+    <div style="text-align: center; max-width: 750px; margin-bottom: 50px;">
+        <h1 style="color: #fff; font-size: clamp(30px, 6vw, 55px); text-transform: uppercase; margin-bottom: 25px; font-family: serif; letter-spacing: 5px;">Школа: Начало пути</h1>
+        
+        <div style="background: rgba(0,0,0,0.2); padding: 25px; border-radius: 20px; border-top: 4px solid #d4af37; box-shadow: 0 15px 35px rgba(0,0,0,0.2);">
+            <p style="color: #ecf0f1; font-size: 19px; line-height: 1.7; margin: 0; font-style: italic;">
+                Каждое утро здесь начинается одинаково: гул голосов, запах мела и скрип сотен кроссовок. 
+                Твой шкафчик — это твой личный бункер. Здесь, за железной дверцей, спрятаны не просто вещи, а вся твоя школьная жизнь.
+            </p>
+            <p id="status-msg" style="color: #d4af37; font-weight: bold; margin-top: 20px; font-size: 17px; letter-spacing: 1px; text-transform: uppercase;">
+                ОТКРОЙ СВОЙ ШКАФЧИК, ЧТОБЫ ЗАБРАТЬ ВЕЩИ!
+            </p>
+        </div>
+    </div>
+
+    <!-- 3. БОЛЬШОЙ ШКАФ (ПО ЦЕНТРУ) -->
+    <div style="position: relative; width: 320px; height: 520px; perspective: 1500px; margin-bottom: 60px;">
+        
+        <!-- ВНУТРЕННОСТЬ -->
+        <div style="position: absolute; inset: 0; background: #1a252f; border-radius: 15px; display: flex; flex-direction: column; align-items: center; justify-content: space-around; padding: 30px; box-sizing: border-box; border: 5px solid #111;">
+            <!-- УЧЕБНИК -->
+            <div style="width: 90px; height: 120px; background: #e74c3c; border-radius: 5px; border-left: 15px solid #c0392b; box-shadow: 0 10px 20px rgba(0,0,0,0.4);"></div>
+            <!-- КРОССОВОК -->
+            <div style="width: 120px; height: 60px; background: #3498db; border-radius: 10px 40px 10px 10px; border-bottom: 10px solid #fff;"></div>
+            <!-- ПИЦЦА -->
+            <div style="width: 0; height: 0; border-left: 55px solid transparent; border-right: 55px solid transparent; border-bottom: 90px solid #f1c40f; filter: drop-shadow(0 5px 10px #000);"></div>
+        </div>
+
+        <!-- ДВЕРЦА -->
+        <div id="locker-door" onclick="doKnock()" style="position: absolute; inset: 0; background: linear-gradient(145deg, #95a5a6, #7f8c8d); border: 5px solid #636e72; border-radius: 15px; z-index: 10; cursor: pointer; transition: 1s cubic-bezier(0.4, 0, 0.2, 1); transform-origin: left; box-shadow: 15px 0 30px rgba(0,0,0,0.3); display: flex; flex-direction: column; align-items: center; padding-top: 40px;">
+            <div style="width: 60px; height: 4px; background: rgba(0,0,0,0.2); margin-bottom: 10px; border-radius: 2px;"></div>
+            <div style="width: 60px; height: 4px; background: rgba(0,0,0,0.2); margin-bottom: 10px; border-radius: 2px;"></div>
+            <div style="width: 60px; height: 4px; background: rgba(0,0,0,0.2); margin-bottom: 10px; border-radius: 2px;"></div>
+            <!-- Ручка -->
+            <div style="position: absolute; right: 20px; top: 50%; width: 12px; height: 60px; background: #2d3436; border-radius: 4px; border: 1px solid #000;"></div>
+        </div>
+    </div>
+
+    <style>
+        .door-opened { transform: rotateY(-110deg); }
+        .door-shaking { animation: shake-anim 0.15s ease-in-out infinite; }
+        @keyframes shake-anim {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(6px); }
+        }
+    </style>
+
+    <script>
+        let kCount = 0;
+        function doKnock() {
+            if (kCount >= 3) return;
+            kCount++;
+            const door = document.getElementById('locker-door');
+            const msg = document.getElementById('status-msg');
+            
+            door.classList.add('door-shaking');
+            setTimeout(() => door.classList.remove('door-shaking'), 200);
+
+            if (kCount === 1) msg.innerText = "ПОСТУЧИ ЕЩЁ РАЗ!";
+            if (kCount === 2) msg.innerText = "ПОЧТИ ОТКРЫЛСЯ!";
+            if (kCount === 3) {
+                door.classList.add('door-opened');
+                msg.innerText = "УРА! ВСЁ НА МЕСТЕ. ПОРА НА УРОКИ!";
+                msg.style.color = "#27ae60";
+            }
+        }
+    </script>
+</section>
+
+<!-- БЛОК 2: ПОСТ ДЕЖУРНОГО (HARD MODE) -->
+<section id="check-shoes" style="position: relative; width: 100%; min-height: 100vh; background: #dfe6e9; display: flex; align-items: center; justify-content: center; padding: 40px; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; gap: 50px; border-top: 10px solid #2d3436; overflow: hidden;">
+    
+    <!-- ДЕЖУРНЫЙ СО СЛЕДЯЩИМИ ГЛАЗАМИ -->
+    <div id="duty-officer" style="flex: 1; display: flex; flex-direction: column; align-items: center; max-width: 300px; z-index: 10;">
+        <div id="head" style="position: relative; width: 200px; height: 260px; background: #2d3436; border-radius: 50px 50px 20px 20px; border: 6px solid #1e272e; box-shadow: 0 15px 30px rgba(0,0,0,0.3);">
+            <!-- Глазницы -->
+            <div style="position: absolute; top: 70px; left: 35px; width: 45px; height: 45px; background: #fff; border-radius: 50%; border: 2px solid #000; overflow: hidden;">
+                <div class="pupil" style="position: absolute; width: 18px; height: 18px; background: #000; border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+            </div>
+            <div style="position: absolute; top: 70px; right: 35px; width: 45px; height: 45px; background: #fff; border-radius: 50%; border: 2px solid #000; overflow: hidden;">
+                <div class="pupil" style="position: absolute; width: 18px; height: 18px; background: #000; border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+            </div>
+            <!-- Повязка -->
+            <div style="position: absolute; top: 160px; left: -10px; width: 220px; height: 45px; background: #d63031; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: bold; transform: rotate(-3deg); font-size: 16px; box-shadow: 0 5px 15px rgba(0,0,0,0.4); letter-spacing: 2px;">ДЕЖУРНЫЙ</div>
+        </div>
+        <div id="bubble" style="margin-top: 25px; background: #fff; padding: 15px 25px; border-radius: 20px; border: 3px solid #2d3436; font-weight: bold; position: relative; font-size: 15px; box-shadow: 0 10px 0 #2d3436;">
+            СМОТРЮ В ОБА! ЧИСТИ ЖИВО!
+        </div>
+    </div>
+
+    <!-- ИНТЕРАКТИВНАЯ ЗОНА -->
+    <div style="flex: 2; max-width: 600px; text-align: center;">
+        <h2 style="color: #2d3436; font-size: 36px; text-transform: uppercase; margin-bottom: 10px;">Детектор Грязи</h2>
+        <p style="color: #636e72; font-weight: bold; margin-bottom: 20px;">Нужно очистить 85% поверхности!</p>
+
+        <div style="position: relative; width: 480px; height: 350px; background: #fff; border: 8px solid #b2bec3; border-radius: 25px; overflow: hidden; margin: 0 auto; cursor: crosshair;">
+            <!-- ЧИСТЫЙ БОТИНК -->
+            <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
+                <div style="width: 320px; height: 140px; background: #0984e3; border-radius: 20px 120px 20px 20px; border-bottom: 25px solid #fff; position: relative;">
+                    <div style="position: absolute; top: 25px; left: 40px; width: 80px; height: 8px; background: #fff; opacity: 0.4; border-radius: 10px;"></div>
+                </div>
+            </div>
+            <!-- СЛОЙ ГРЯЗИ -->
+            <canvas id="dirtCanvas" width="480" height="350" style="position: absolute; top: 0; left: 0; z-index: 5;"></canvas>
+        </div>
+
+        <div style="margin-top: 25px; font-size: 28px; font-weight: 900;">
+            ТАЙМЕР: <span id="timer" style="color: #d63031;">10.0</span>
+        </div>
+        <div id="progressText" style="color: #636e72; font-size: 14px; margin-top: 5px;">Очищено: 0%</div>
+    </div>
+
+    <!-- ШТРАФНОЙ ТАЛОН (СКРЫТ) -->
+    <div id="fine-ticket" style="display: none; position: absolute; width: 300px; padding: 20px; background: #ff7675; border: 5px dashed #d63031; color: #fff; z-index: 100; transform: rotate(10deg); box-shadow: 0 20px 40px rgba(0,0,0,0.4); text-align: center;">
+        <h1 style="margin: 0;">ШТРАФ!</h1>
+        <p>Нарушение: Грязная сменка</p>
+        <p style="font-size: 12px;">Будет занесено в личное дело</p>
+        <button onclick="this.parentElement.style.display='none'" style="background: #fff; border: none; padding: 5px 15px; cursor: pointer; font-weight: bold; color: #d63031;">ПОНЯТНО...</button>
+    </div>
+
+</section>
+
+<script>
+(function() {
+    const canvas = document.getElementById('dirtCanvas');
+    const ctx = canvas.getContext('2d');
+    const pupils = document.querySelectorAll('.pupil');
+    const timerText = document.getElementById('timer');
+    const bubble = document.getElementById('bubble');
+    const progressText = document.getElementById('progressText');
+    const ticket = document.getElementById('fine-ticket');
+
+    let timeLeft = 10.0;
+    let timerRunning = false;
+    let gameEnded = false;
+    let totalDirty;
+
+    // Инициализация грязи (густая и липкая)
+    ctx.fillStyle = '#3d2b1f';
+    ctx.fillRect(0,0,480,350);
+    for(let i=0; i<150; i++) {
+        ctx.fillStyle = '#2d1e14';
+        ctx.beginPath();
+        ctx.arc(Math.random()*480, Math.random()*350, Math.random()*40+20, 0, Math.PI*2);
+        ctx.fill();
+    }
+    totalDirty = ctx.getImageData(0,0,480,350).data.filter((_,i) => i%4===3 && _>0).length;
+
+    // ВЗГЛЯД ДЕЖУРНОГО
+    window.addEventListener('mousemove', (e) => {
+        pupils.forEach(pupil => {
+            const rect = pupil.parentElement.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            const angle = Math.atan2(e.clientY - centerY, e.clientX - centerX);
+            const dist = 8;
+            pupil.style.transform = `translate(calc(-50% + ${Math.cos(angle)*dist}px), calc(-50% + ${Math.sin(angle)*dist}px))`;
+        });
+    });
+
+    function updateProgress() {
+        const currentDirty = ctx.getImageData(0,0,480,350).data.filter((_,i) => i%4===3 && _>0).length;
+        const cleaned = Math.round((1 - currentDirty / totalDirty) * 100);
+        progressText.innerText = `Очищено: ${cleaned}%`;
+        
+        if(cleaned >= 85 && !gameEnded) {
+            win();
+        }
+    }
+
+    function win() {
+        gameEnded = true;
+        clearInterval(timerRunning);
+        bubble.innerText = "ХМ, ТЕПЕРЬ БЛЕСТИТ! ПРОХОДИ.";
+        timerText.style.color = "#27ae60";
+        localStorage.setItem('school_fine', 'false'); // Для финала
+    }
+
+    function lose() {
+        gameEnded = true;
+        bubble.innerText = "ТЫ ПОПАЛСЯ! ВОТ ТЕБЕ ШТРАФ!";
+        ticket.style.display = 'block';
+        localStorage.setItem('school_fine', 'true'); // Запомним штраф
+    }
+
+    let drawing = false;
+    canvas.onmousedown = () => {
+        if(gameEnded) return;
+        if(!timerRunning) {
+            timerRunning = setInterval(() => {
+                timeLeft -= 0.1;
+                timerText.innerText = timeLeft.toFixed(1);
+                if(timeLeft <= 0) {
+                    clearInterval(timerRunning);
+                    if(!gameEnded) lose();
+                }
+            }, 100);
+        }
+        drawing = true;
+    };
+    window.onmouseup = () => { drawing = false; ctx.beginPath(); };
+    canvas.onmousemove = (e) => {
+        if(!drawing || gameEnded) return;
+        const r = canvas.getBoundingClientRect();
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.lineWidth = 35; // Сделал чуть меньше, чтобы было сложнее
+        ctx.lineCap = 'round';
+        ctx.lineTo(e.clientX - r.left, e.clientY - r.top);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(e.clientX - r.left, e.clientY - r.top);
+        updateProgress();
+    };
+})();
+</script>
+
+
+<!-- БЛОК 3: КОНТРОЛЬНАЯ (ТОТ САМЫЙ ВИЗУАЛ + ФИКС КНОПКИ) -->
+<section id="exam-ultra" style="position: relative; width: 100%; min-height: 100vh; background: #ececec; display: flex; align-items: center; justify-content: center; padding: 40px; box-sizing: border-box; font-family: 'Courier New', Courier, monospace; gap: 50px; border-top: 10px solid #2d3436; overflow: hidden; user-select: none;">
+    
+    <!-- ТЕКСТ СЛЕВА (ИСКУССТВО ТИШИНЫ) -->
+    <div style="flex: 1; max-width: 450px; z-index: 10; background: #fff; padding: 35px; border-radius: 20px; box-shadow: 15px 15px 0 #2d3436; border: 3px solid #000;">
+        <h2 style="color: #c0392b; font-size: 32px; text-transform: uppercase; margin-bottom: 20px; font-family: serif;">ИСКУССТВО ТИШИНЫ</h2>
+        <p style="font-size: 18px; line-height: 1.6; color: #333; margin-bottom: 20px;">
+            Учитель химии — это хищник. Его зрение настроено на малейшее движение локтя. Чтобы списать этот тест, тебе нужно стать тенью.
+        </p>
+        <div style="background: #fdfaf0; border-left: 5px solid #d4af37; padding: 15px; font-style: italic;">
+            <b>ПРАВИЛО №1:</b> Пиши короткими сериями. <br>
+            <b>ПРАВИЛО №2:</b> Красный затылок — это сигнал СТОП. <br>
+            <b>ПРАВИЛО №3:</b> Если увидел ГЛАЗА — ты проиграл.
+        </div>
+        <p style="font-size: 14px; color: #666; margin-top: 20px;">Допиши все строки, чтобы получить заслуженную оценку прямо на этот листок!</p>
+    </div>
+
+    <!-- КЛАСС -->
+    <div style="flex: 1.5; display: flex; flex-direction: column; align-items: center;">
+        
+        <!-- ДОСКА -->
+        <div style="position: relative; width: 100%; height: 320px; background: #2c3e50; border: 12px solid #5d4037; border-radius: 8px; display: flex; align-items: flex-end; justify-content: center; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.4);">
+            <div style="position: absolute; top: 20px; width: 80%; color: rgba(255,255,255,0.1); font-size: 14px; line-height: 1.4;">
+                x² + y² = z² ... Гравитация g = 9.8 ... ТИШИНА! <br> КТО ШУМИТ - ВЫЙДЕТ В КОРРИДОР!
+            </div>
+            
+            <div id="teacher-hero" style="width: 160px; height: 260px; position: relative; transition: transform 0.15s ease-in;">
+                <svg viewBox="0 0 100 150">
+                    <path d="M20 150 L35 40 L65 40 L80 150 Z" fill="#1e272e"/>
+                    <circle id="teacher-skull" cx="50" cy="30" r="25" fill="#ffe0bd" style="transition: 0.4s;"/>
+                    <g id="scary-eyes" style="opacity: 0; transition: 0.1s;">
+                        <circle cx="38" cy="30" r="9" fill="#fff" stroke="#000" stroke-width="2"/>
+                        <circle cx="62" cy="30" r="9" fill="#fff" stroke="#000" stroke-width="2"/>
+                        <circle cx="38" cy="30" r="5" fill="#f00"/>
+                        <circle cx="62" cy="30" r="5" fill="#f00"/>
+                    </g>
+                </svg>
+            </div>
+        </div>
+
+        <!-- ЛИСТОК УЧЕНИКА -->
+        <div id="exam-paper" style="position: relative; width: 450px; height: 320px; background: #fff; margin-top: 40px; box-shadow: 0 15px 45px rgba(0,0,0,0.3); padding: 30px; border: 1px solid #bbb; overflow: hidden; background-image: linear-gradient(#eee 1px, transparent 1px); background-size: 100% 30px;">
+            <div id="paper-content" style="font-size: 24px; color: #1a1a1a; line-height: 30px; font-weight: bold; white-space: pre-wrap; font-family: 'Courier New', monospace;"></div>
+            
+            <!-- ЖИРНАЯ ПЯТЕРКА -->
+            <div id="big-grade" style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transform: scale(4) rotate(-30deg); transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); pointer-events: none; z-index: 100;">
+                <span style="font-size: 180px; color: #d63031; font-weight: 900; -webkit-text-stroke: 3px white;">5</span>
+                <span style="font-size: 35px; color: #d63031; font-weight: bold; background: white; padding: 0 10px; margin-top: -40px; border: 3px solid #d63031;">ОТЛИЧНО!</span>
+            </div>
+
+            <div id="pen-cursor" style="position: absolute; bottom: 30px; right: 30px; font-size: 70px; opacity: 0; transition: 0.1s; pointer-events: none;">✍️</div>
+        </div>
+
+        <button id="write-hold" style="margin-top: 40px; padding: 25px 90px; font-size: 26px; font-weight: 900; background: #2d3436; color: #fff; border: none; border-radius: 10px; cursor: pointer; box-shadow: 0 10px 0 #000; text-transform: uppercase;">ПИСАТЬ</button>
+    </div>
+
+    <!-- ДОКЛАДНАЯ -->
+    <div id="fail-overlay" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 1000; align-items: center; justify-content: center;">
+        <div style="background: #fff; padding: 60px; border: 10px double #d63031; text-align: center; transform: rotate(2deg);">
+            <h1 style="font-size: 60px; color: #d63031; margin: 0;">ПАЛЕВО!</h1>
+            <p style="font-size: 22px; margin: 25px 0; color: #333;">Учитель заметил твою шпаргалку. <br> Двойка и вызов родителей!</p>
+            <button onclick="location.reload()" style="padding: 15px 40px; background: #000; color: #fff; border: none; cursor: pointer; font-weight: bold; font-size: 18px;">ПЕРЕСДАТЬ</button>
+        </div>
+    </div>
+</section>
+
+<script>
+(function() {
+    const finalAnswers = ["1. Ответ: x=12\n", "2. Скорость=5м/с\n", "3. Гравитация g=9.8\n", "4. Все верно!\n", "5. Ура, списано!\n"];
+    let lineIdx = 0, charIdx = 0, writing = false, watching = false, done = false;
+    let lastWriteTime = 0;
+
+    const teacher = document.getElementById('teacher-hero');
+    const skull = document.getElementById('teacher-skull');
+    const eyes = document.getElementById('scary-eyes');
+    const paper = document.getElementById('paper-content');
+    const hand = document.getElementById('pen-cursor');
+    const btn = document.getElementById('write-hold');
+    const grade = document.getElementById('big-grade');
+    const fail = document.getElementById('fail-overlay');
+
+    function teacherAILogic() {
+        if(done) return;
+        watching = false;
+        skull.style.fill = "#ffe0bd";
+        teacher.style.transform = "rotateY(0deg)";
+        eyes.style.opacity = "0";
+
+        setTimeout(() => {
+            if(done) return;
+            skull.style.fill = "#ff5e57"; // КРАСНЕЕТ
+            
+            setTimeout(() => {
+                if(done) return;
+                watching = true;
+                teacher.style.transform = "rotateY(180deg)"; // ПОВОРОТ
+                eyes.style.opacity = "1";
+                if(writing) { done = true; fail.style.display = 'flex'; }
+                else setTimeout(teacherAILogic, 1500);
+            }, 600);
+        }, Math.random() * 2500 + 2000);
+    }
+    teacherAILogic();
+
+    // ИСПРАВЛЕННАЯ ЛОГИКА КНОПКИ
+    function startWriting() {
+        if(done) return;
+        writing = true;
+        hand.style.opacity = "1";
+        if(watching) { done = true; fail.style.display = 'flex'; }
+    }
+
+    function stopWriting() {
+        writing = false;
+        hand.style.opacity = "0";
+    }
+
+    btn.onmousedown = btn.ontouchstart = startWriting;
+    window.onmouseup = window.ontouchend = stopWriting; // Слушаем отжатие ВЕЗДЕ
+    btn.onmouseleave = stopWriting; // Если мышка ушла с кнопки
+
+    function typeEffect(time) {
+        if(done) return;
+        if(writing && lineIdx < finalAnswers.length) {
+            if(time - lastWriteTime > 100) { // Медленное письмо (100мс на букву)
+                hand.style.transform = `translate(${Math.random()*15}px, ${Math.random()*8}px)`;
+                let currentStr = finalAnswers[lineIdx];
+                if(charIdx < currentStr.length) {
+                    paper.textContent += currentStr[charIdx];
+                    charIdx++;
+                } else {
+                    lineIdx++;
+                    charIdx = 0;
+                }
+                lastWriteTime = time;
+            }
+        }
+        if(lineIdx >= finalAnswers.length) {
+            done = true;
+            grade.style.opacity = "1";
+            grade.style.transform = "scale(1) rotate(-15deg)";
+            btn.style.display = "none";
+        }
+        requestAnimationFrame(typeEffect);
+    }
+    requestAnimationFrame(typeEffect);
+})();
+</script>
+
+
+
+
+<!-- БЛОК 4: АРХИВЫ ШПАРГАЛОК (ВЕРСИЯ ЖУРНАЛ) -->
+<section id="invisible-section" style="position: relative; padding: 80px 5%; background: #ffffff; min-height: 100vh; color: #2d3436; font-family: 'Georgia', serif; border-top: 10px solid #2d3436; overflow: hidden;">
+    
+    <!-- ШАПКА БЛОКА -->
+    <div style="text-align: center; max-width: 900px; margin: 0 auto 60px;">
+        <h2 style="font-size: 48px; color: #d63031; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">Секретные Технологии</h2>
+        <div style="width: 100px; height: 4px; background: #d63031; margin: 20px auto;"></div>
+        <p style="font-style: italic; font-size: 20px; color: #636e72;">От лимонного сока до цифровых микросхем</p>
+    </div>
+
+    <!-- СЕТКА С ТЕКСТОМ (ВЕРХНИЙ РЯД) -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1100px; margin: 0 auto 40px;">
+        <div style="background: #f8f9fa; padding: 30px; border-top: 5px solid #d63031; box-shadow: 0 10px 20px rgba(0,0,0,0.05);">
+            <h4 style="color: #d63031; text-transform: uppercase;">01. Эпоха Алхимии</h4>
+            <p style="font-size: 16px; line-height: 1.6;">Первые шпаргалки появились вместе с первыми экзаменами в Древнем Китае. Чиновники зашивали тексты Конфуция в подкладки своих шелковых халатов. Позже в Европе студенты использовали "симпатические чернила" из сока лука или лимона. Запись становилась видимой только при нагреве над свечой — рискованный метод, учитывая, что листок мог вспыхнуть прямо в руках профессора.</p>
+        </div>
+        <div style="background: #f8f9fa; padding: 30px; border-top: 5px solid #d63031; box-shadow: 0 10px 20px rgba(0,0,0,0.05);">
+            <h4 style="color: #d63031; text-transform: uppercase;">02. Инженерная Мысль</h4>
+            <p style="font-size: 16px; line-height: 1.6;">В XX веке шпаргалки стали шедевром микромеханики. Ручки с выезжающими свитками, тексты, нацарапанные иглой на прозрачных линейках, и формулы на внутренней стороне этикетки бутылки газировки. Каждый такой артефакт требовал часов кропотливого труда, в процессе которого студент невольно запоминал половину материала. В этом и заключался главный секрет учителей.</p>
+        </div>
+    </div>
+
+    <!-- ЦЕНТРАЛЬНЫЙ ИНТЕРАКТИВ -->
+    <div style="text-align: center; margin: 60px 0;">
+        <p style="font-weight: bold; margin-bottom: 20px; color: #d63031; text-transform: uppercase; letter-spacing: 2px;">Прояви скрытые знания (сотри слой пыли):</p>
+        <div id="paper-container" style="position: relative; width: 600px; height: 350px; margin: 0 auto; background: #fff; border: 2px solid #ddd; box-shadow: 0 20px 50px rgba(0,0,0,0.1); cursor: crosshair;">
+            
+            <!-- СКРЫТЫЕ ФОРМУЛЫ (ПОД ГРЯЗЬЮ) -->
+            <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center; font-family: monospace; color: #2d3436; font-size: 20px; padding: 40px; line-height: 2;">
+                <b>СЕКРЕТНЫЙ ШИФР:</b><br>
+                sin²α + cos²α = 1 <br>
+                F = G * (m1*m2 / r²) <br>
+                PV = nRT <br>
+                <span style="color: #d63031; font-weight: 900;">ОТВЕТ НА БИЛЕТ №12: ВАРЯГИ</span>
+            </div>
+
+            <!-- СЛОЙ "НЕВИДИМОСТИ" -->
+            <canvas id="scratchCanvas" width="600" height="350" style="position: absolute; top: 0; left: 0; z-index: 10;"></canvas>
+        </div>
+    </div>
+
+    <!-- СЕТКА С ТЕКСТОМ (НИЖНИЙ РЯД) -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1100px; margin: 0 auto;">
+        <div style="background: #f8f9fa; padding: 30px; border-bottom: 5px solid #d63031; box-shadow: 0 10px 20px rgba(0,0,0,0.05);">
+            <h4 style="color: #d63031; text-transform: uppercase;">03. Психология Блефа</h4>
+            <p style="font-size: 16px; line-height: 1.6;">Самая лучшая шпаргалка — та, которую не прячут. Метод "открытого листа" заключается в том, чтобы написать формулы прямо на обложке тетради, которая лежит на парте. Учитель ищет скрытое в рукавах, под коленками или в калькуляторе, не замечая того, что находится у него перед глазами. Это требует стальных нервов и актерского мастерства уровня Голливуда.</p>
+        </div>
+        <div style="background: #f8f9fa; padding: 30px; border-bottom: 5px solid #d63031; box-shadow: 0 10px 20px rgba(0,0,0,0.05);">
+            <h4 style="color: #d63031; text-transform: uppercase;">04. Цифровое Пророчество</h4>
+            <p style="font-size: 16px; line-height: 1.6;">Сегодняшний день — это битва технологий. Смарт-часы, микронаушники и умные очки. Но вместе с ними эволюционируют и методы борьбы: глушилки связи и детекторы сигналов. Однако, как говорят классики школы: "Ни один компьютер не заменит старую добрую бумажку, спрятанную в подошве левого кроссовка". Традиции бессмертны, пока существуют экзамены.</p>
+        </div>
+    </div>
+
+</section>
+
+<script>
+(function() {
+    const canvas = document.getElementById('scratchCanvas');
+    const ctx = canvas.getContext('2d');
+    let isDrawing = false;
+
+    // Слой маски (серебристое покрытие как на лотерейных билетах)
+    function setup() {
+        ctx.fillStyle = '#dfe6e9';
+        ctx.fillRect(0, 0, 600, 350);
+        ctx.strokeStyle = '#b2bec3';
+        for(let i=0; i<30; i++) {
+            ctx.beginPath();
+            ctx.moveTo(0, i*15); ctx.lineTo(600, i*15 + 100);
+            ctx.stroke();
+        }
+        ctx.font = 'bold 30px Arial';
+        ctx.fillStyle = 'rgba(0,0,0,0.05)';
+        ctx.fillText('SECRET DATA', 200, 180);
+    }
+    setup();
+
+    canvas.onmousedown = () => isDrawing = true;
+    window.onmouseup = () => isDrawing = false;
+    canvas.onmousemove = (e) => {
+        if (!isDrawing) return;
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.lineWidth = 40;
+        ctx.lineCap = 'round';
+        ctx.lineTo(x, y);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+    };
+})();
+</script>
+
+
+
+<section id="alchemy-lab" style="position: relative; padding: 60px 5%; background: #fff; min-height: 100vh; color: #2d3436; font-family: 'Segoe UI', sans-serif; border-top: 8px solid #27ae60; overflow: hidden; display: flex; flex-direction: column; align-items: center; user-select: none;">
+    
+    <div style="text-align: center; max-width: 700px; margin-bottom: 30px;">
+        <h2 style="font-size: 32px; color: #27ae60; text-transform: uppercase;">Испытание Шести Стихий</h2>
+        <p style="font-size: 16px; color: #7f8c8d; font-style: italic;">
+            "Вау! Чтобы найти истину, начни с <b>Воды</b>, пролей <b>Кислоту</b>, добавь <b>Магний</b> для блеска, 
+            смягчи <b>Медью</b>, укрепи <b>Цинком</b> и увенчай всё <b>Золотом</b>. Один неверный шаг — и всё скроет дым..."
+        </p>
+    </div>
+
+    <!-- СЕТКА ИЗ 6 КОЛБ -->
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-bottom: 40px; z-index: 10;">
+        <div onclick="addStep('H2O', '#3498db')" style="cursor:pointer; text-align:center;"><div style="width:45px; height:85px; background:#3498db; border:2px solid #333; border-radius:5px 5px 20px 20px; margin:0 auto;"></div><b>H₂O</b></div>
+        <div onclick="addStep('HCl', '#e74c3c')" style="cursor:pointer; text-align:center;"><div style="width:45px; height:85px; background:#e74c3c; border:2px solid #333; border-radius:5px 5px 20px 20px; margin:0 auto;"></div><b>HCl</b></div>
+        <div onclick="addStep('Mg', '#1abc9c')" style="cursor:pointer; text-align:center;"><div style="width:45px; height:85px; background:#1abc9c; border:2px solid #333; border-radius:5px 5px 20px 20px; margin:0 auto;"></div><b>Mg</b></div>
+        <div onclick="addStep('Cu', '#e67e22')" style="cursor:pointer; text-align:center;"><div style="width:45px; height:85px; background:#e67e22; border:2px solid #333; border-radius:5px 5px 20px 20px; margin:0 auto;"></div><b>Cu</b></div>
+        <div onclick="addStep('Zn', '#95a5a6')" style="cursor:pointer; text-align:center;"><div style="width:45px; height:85px; background:#95a5a6; border:2px solid #333; border-radius:5px 5px 20px 20px; margin:0 auto;"></div><b>Zn</b></div>
+        <div onclick="addStep('Au', '#f1c40f')" style="cursor:pointer; text-align:center;"><div style="width:45px; height:85px; background:#f1c40f; border:2px solid #333; border-radius:5px 5px 20px 20px; margin:0 auto;"></div><b>Au</b></div>
+    </div>
+
+    <!-- ГЛАВНАЯ КОЛБА -->
+    <div id="beaker-wrap" style="position: relative; width: 150px; height: 200px; border: 5px solid #333; border-radius: 10px 10px 50px 50px; background: rgba(0,0,0,0.02); overflow: hidden;">
+        <div id="liquid-flow" style="position: absolute; bottom: 0; width: 100%; height: 0%; transition: 0.5s;"></div>
+    </div>
+
+    <div id="lab-hint" style="margin-top: 30px; font-weight: bold; color: #27ae60;">ШАГОВ: 0 / 6</div>
+
+    <!-- ТРЯПКА И ДЫМ -->
+    <canvas id="smokeOverlay" style="position: fixed; inset: 0; z-index: 2000; display: none; cursor: none;"></canvas>
+    <div id="rag-tool" style="position: fixed; font-size: 80px; pointer-events: none; z-index: 2001; display: none; transform: translate(-50%, -50%);">🧼</div>
+
+</section>
+
+<script>
+(function() {
+    const targetOrder = ['H2O', 'HCl', 'Mg', 'Cu', 'Zn', 'Au'];
+    let userOrder = [];
+    const liquid = document.getElementById('liquid-flow');
+    const hint = document.getElementById('lab-hint');
+    const canvas = document.getElementById('smokeOverlay');
+    const rag = document.getElementById('rag-tool');
+    const ctx = canvas.getContext('2d');
+
+    window.addStep = function(id, color) {
+        if(userOrder.length >= 6) return;
+        userOrder.push(id);
+        liquid.style.height = (userOrder.length * 16.6) + '%';
+        liquid.style.background = color;
+        hint.innerText = `ШАГОВ: ${userOrder.length} / 6`;
+
+        if(userOrder.length === 6) {
+            const isCorrect = userOrder.every((val, i) => val === targetOrder[i]);
+            setTimeout(() => {
+                if(isCorrect) {
+                    hint.innerText = "ВАУ! ТЫ МАСТЕР АЛХИМИИ! ✅";
+                    document.getElementById('beaker-wrap').style.boxShadow = "0 0 40px #f1c40f";
+                } else {
+                    showSmoke();
+                }
+            }, 600);
+        }
+    };
+
+    function showSmoke() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        canvas.style.display = 'block';
+        rag.style.display = 'block';
+        ctx.fillStyle = 'rgba(20, 20, 20, 0.98)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = 'white';
+        ctx.font = 'bold 25px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('ОШИБКА! ВСЁ В ДЫМУ! СОТРИ ЕГО ТРЯПКОЙ!', canvas.width/2, canvas.height/2);
+    }
+
+    let drawing = false;
+    window.addEventListener('mousedown', () => drawing = true);
+    window.addEventListener('mouseup', () => drawing = false);
+    window.addEventListener('mousemove', (e) => {
+        if (canvas.style.display === 'block') {
+            rag.style.left = e.clientX + 'px';
+            rag.style.top = e.clientY + 'px';
+            if (drawing) {
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.beginPath();
+                ctx.arc(e.clientX, e.clientY, 150, 0, Math.PI * 2); // СУПЕР ТРЯПКА
+                ctx.fill();
+                checkClear();
+            }
+        }
+    });
+
+    function checkClear() {
+        const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+        let count = 0;
+        for (let i = 3; i < pixels.length; i += 400) { // Проверка каждого 100-го пикселя для скорости
+            if (pixels[i] > 0) count++;
+        }
+        if (count < 200) { // Если почти всё стерто
+            canvas.style.display = 'none';
+            rag.style.display = 'none';
+            resetGame();
+        }
+    }
+
+    function resetGame() {
+        userOrder = [];
+        liquid.style.height = '0%';
+        hint.innerText = "ПОПРОБУЙ СНОВА (СЛЕДУЙ ЗАГАДКЕ)...";
+        document.getElementById('beaker-wrap').style.boxShadow = "none";
+    }
+})();
+</script>
+
+
+
+
+<!-- БЛОК 6: ШКОЛЬНЫЙ МАРКЕТ 2.0 -->
+<section id="mega-buffet-v2" style="position: relative; padding: 60px 5%; background: #ffffff; min-height: 100vh; font-family: 'Segoe UI', sans-serif; display: flex; flex-direction: column; align-items: center; border-top: 8px solid #e67e22; user-select: none;">
+    
+    <!-- АКЦИИ -->
+    <div style="display: flex; gap: 20px; margin-bottom: 30px;">
+        <div style="background: #d63031; color: #fff; padding: 10px 20px; border-radius: 10px; border: 2px dashed #fff; font-size: 13px;">
+            🔥 КОМБО "СЫТЫЙ ГЕНИЙ": [Пицца + Чай + Пирожок] = +30🪙
+        </div>
+        <div style="background: #27ae60; color: #fff; padding: 10px 20px; border-radius: 10px; border: 2px dashed #fff; font-size: 13px;">
+            🍏 АКЦИЯ "ВИТАМИНЫ": [Яблоко + Банан + Вода] = +50🪙
+        </div>
+    </div>
+
+    <div style="display: flex; gap: 40px; max-width: 1200px; width: 100%; align-items: flex-start;">
+        
+        <!-- ВИТРИНА (12 ТОВАРОВ) -->
+        <div style="flex: 2; display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px;" id="buffet-grid">
+            <!-- Генерируется через JS -->
+        </div>
+
+        <!-- КАССА И СЫТОСТЬ -->
+        <div style="flex: 1; background: #fdfaf0; padding: 30px; border: 3px solid #d2b48c; border-radius: 15px; box-shadow: 10px 10px 0 #eee;">
+            <h3 style="text-align: center; border-bottom: 2px solid #d2b48c; padding-bottom: 10px;">ВАШ ЗАКАЗ</h3>
+            
+            <!-- ИНДИКАТОР СЫТОСТИ -->
+            <div style="margin: 20px 0;">
+                <div style="display: flex; justify-content: space-between; font-size: 12px; font-weight: bold; margin-bottom: 5px;">
+                    <span>СЫТОСТЬ:</span> <span id="satiety-val">0%</span>
+                </div>
+                <div style="width: 100%; height: 15px; background: #ddd; border-radius: 10px; overflow: hidden;">
+                    <div id="satiety-bar" style="width: 0%; height: 100%; background: #27ae60; transition: 0.5s;"></div>
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 10px;">
+                <span>КОИНЫ:</span> <span id="wallet-balance" style="color: #e67e22;">250 🪙</span>
+            </div>
+
+            <div id="receipt-list" style="font-size: 13px; color: #636e72; min-height: 150px; border-top: 1px solid #eee; padding-top: 10px;">
+                Кликни на продукт, чтобы купить...
+            </div>
+            
+            <p style="font-size: 10px; color: #aaa; margin-top: 15px;">*Нажми на товар в чеке, чтобы вернуть его</p>
+        </div>
+    </div>
+</section>
+
+<script>
+(function() {
+    let coins = 250;
+    let satiety = 0;
+    let tray = [];
+    let promo1Used = false;
+    let promo2Used = false;
+
+    const menu = [
+        {id:'piz', n:'Пицца', p:90, s:40, e:'🍕'}, {id:'tea', n:'Чай', p:20, s:5, e:'☕'},
+        {id:'pir', n:'Пирожок', p:40, s:25, e:'🥐'}, {id:'juc', n:'Сок', p:50, s:10, e:'🧃'},
+        {id:'apl', n:'Яблоко', p:30, s:15, e:'🍎'}, {id:'choc', n:'Шоко', p:60, s:20, e:'🍫'},
+        {id:'sal', n:'Салат', p:55, s:30, e:'🥗'}, {id:'brg', n:'Бутер', p:70, s:35, e:'🥪'},
+        {id:'wat', n:'Вода', p:25, s:2, e:'💧'}, {id:'cup', n:'Кекс', p:45, s:20, e:'🧁'},
+        {id:'bag', n:'Бублик', p:35, s:15, e:'🥯'}, {id:'ban', n:'Банан', p:30, e:'🍌', s:15}
+    ];
+
+    const grid = document.getElementById('buffet-grid');
+    const receipt = document.getElementById('receipt-list');
+    const wallet = document.getElementById('wallet-balance');
+    const satBar = document.getElementById('satiety-bar');
+    const satVal = document.getElementById('satiety-val');
+
+    menu.forEach(item => {
+        const card = document.createElement('div');
+        card.style.cssText = "background:#fff; border:1px solid #eee; padding:15px; border-radius:12px; text-align:center; cursor:pointer; transition:0.2s;";
+        card.innerHTML = `<div style="font-size:35px;">${item.e}</div><div style="font-weight:bold; font-size:13px;">${item.n}</div><div style="color:#e67e22; font-size:14px;">${item.p}🪙 (+${item.s}%)</div>`;
+        card.onclick = () => buy(item);
+        grid.appendChild(card);
+    });
+
+    function buy(item) {
+        if(coins >= item.p) {
+            coins -= item.p;
+            satiety = Math.min(100, satiety + item.s);
+            tray.push(item);
+            update();
+            checkPromos();
+        } else {
+            alert("Мало коинов! Верни что-то другое.");
+        }
+    }
+
+    function refund(index) {
+        const item = tray[index];
+        coins += item.p;
+        satiety = Math.max(0, satiety - item.s);
+        tray.splice(index, 1);
+        update();
+    }
+
+    function update() {
+        wallet.innerText = coins + " 🪙";
+        satBar.style.width = satiety + "%";
+        satVal.innerText = satiety + "%";
+        receipt.innerHTML = tray.length === 0 ? "Пока пусто..." : "";
+        
+        tray.forEach((item, index) => {
+            const row = document.createElement('div');
+            row.style.cssText = "display:flex; justify-content:space-between; margin-bottom:5px; cursor:pointer; padding:2px; background:#fff; border-radius:4px;";
+            row.title = "Нажми, чтобы вернуть";
+            row.innerHTML = `<span>${item.e} ${item.n}</span> <span>-${item.p} ✖</span>`;
+            row.onclick = () => refund(index);
+            receipt.appendChild(row);
+        });
+    }
+
+    function checkPromos() {
+        const ids = tray.map(i => i.id);
+        if(!promo1Used && ids.includes('piz') && ids.includes('tea') && ids.includes('pir')) {
+            coins += 30; promo1Used = true; update();
+            alert("🎁 Акция СЫТЫЙ ГЕНИЙ: +30 коинов!");
+        }
+        if(!promo2Used && ids.includes('apl') && ids.includes('ban') && ids.includes('wat')) {
+            coins += 50; promo2Used = true; update();
+            alert("🎁 Акция ВИТАМИНЫ: +50 коинов!");
+        }
+    }
+})();
+</script>
+
+
+
+<section id="detect-lies" style="position: relative; padding: 80px 5%; background: #f0f0f0; min-height: 100vh; display: flex; gap: 40px; align-items: flex-start; border-top: 8px solid #c0392b; font-family: 'Arial', sans-serif;">
+    
+    <!-- КНОПКИ ВЫБОРА -->
+    <div style="flex: 1; background: #fff; padding: 30px; border-radius: 10px; border: 3px solid #000; box-shadow: 10px 10px 0 #000;">
+        <h2 style="color: #c0392b; text-transform: uppercase; font-size: 24px; margin-bottom: 20px;">Генератор Правды (или нет)</h2>
+        
+        <div style="display: flex; flex-direction: column; gap: 15px;">
+            <select id="who-p" style="padding: 12px; border: 2px solid #333;"><option value="real">КТО: Младший брат</option><option value="fake">КТО: Илон Маск</option><option value="real">КТО: Соседский пес</option><option value="fake">КТО: Пришелец</option><option value="real">КТО: Кот-хулиган</option></select>
+            <select id="act-p" style="padding: 12px; border: 2px solid #333;"><option value="real">ДЕЙСТВИЕ: Случайно облил</option><option value="fake">ДЕЙСТВИЕ: Телепортировал</option><option value="real">ДЕЙСТВИЕ: Разорвал</option><option value="fake">ДЕЙСТВИЕ: Сжег  лазером</option><option value="real">ДЕЙСТВИЕ: Спрятал</option></select>
+            <select id="item-p" style="padding: 12px; border: 2px solid #333;"><option value="real">ЧТО: Мой дневник</option><option value="fake">ЧТО: Всю школу</option><option value="real">ЧТО: Мою сменку</option><option value="fake">ЧТО: Время</option><option value="real">ЧТО: Домашку</option></select>
+            <select id="where-p" style="padding: 12px; border: 2px solid #333;"><option value="real">ГДЕ: Дома на кухне</option><option value="fake">ГДЕ: На Марсе</option><option value="real">ГДЕ: В прихожей</option><option value="fake">ГДЕ: В черной дыре</option><option value="real">ГДЕ: Под кроватью</option></select>
+            <select id="why-p" style="padding: 12px; border: 2px solid #333;"><option value="real">ПОЧЕМУ: По ошибке</option><option value="fake">ПОЧЕМУ: Спасал галактику</option><option value="real">ПОЧЕМУ: Потому что вредный</option><option value="fake">ПОЧЕМУ: Приказ из будущего</option><option value="real">ПОЧЕМУ: Играл</option></select>
+        </div>
+
+        <button onclick="checkLie()" style="margin-top: 30px; width: 100%; padding: 20px; background: #000; color: #fff; font-weight: bold; cursor: pointer; text-transform: uppercase;">СДАТЬ НА ПРОВЕРКУ</button>
+    </div>
+
+    <!-- ДОКУМЕНТ -->
+    <div id="paper-doc" style="flex: 1.2; background: #fff; padding: 60px; min-height: 500px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); position: relative; border-radius: 5px;">
+        <div style="text-align: right; font-size: 14px;">Кому: Самому строгому учителю<br>От: Бедного ученика</div>
+        <h3 style="text-align: center; margin: 40px 0;">ОБЪЯСНИТЕЛЬНАЯ ЗАПИСКА</h3>
+        <p id="result-text" style="font-size: 20px; font-family: serif; line-height: 1.8; font-style: italic; color: #444;">Тут будет твоя история...</p>
+        
+        <!-- ПЕЧАТИ (БОЛЬШИЕ) -->
+        <div id="stamp-yes" style="display: none; position: absolute; bottom: 40px; right: 40px; width: 180px; height: 180px; border: 8px solid #2ecc71; color: #2ecc71; border-radius: 50%; align-items: center; justify-content: center; font-weight: 900; font-size: 20px; transform: rotate(-15deg);">УВАЖИТЕЛЬНО</div>
+        <div id="stamp-no" style="display: none; position: absolute; bottom: 40px; right: 40px; width: 180px; height: 180px; border: 8px solid #e74c3c; color: #e74c3c; border-radius: 50%; align-items: center; justify-content: center; font-weight: 900; font-size: 20px; transform: rotate(15deg); text-align: center;">НЕ ВЕРЮ!<br>РОДИТЕЛЕЙ В ШКОЛУ!</div>
+    </div>
+</section>
+
+<script>
+function checkLie() {
+    const s = ['who-p', 'act-p', 'item-p', 'where-p', 'why-p'];
+    let isFake = false;
+    let story = "Довожу до вашего сведения, что ";
+    
+    s.forEach((id, index) => {
+        const el = document.getElementById(id);
+        const val = el.options[el.selectedIndex].text.split(': ')[1];
+        story += (index === 0 ? val : val.toLowerCase()) + (index === 4 ? "." : " ");
+        if(el.value === 'fake') isFake = true; // ХОТЯ БЫ ОДИН ФЕЙК - И ВСЁ!
+    });
+
+    document.getElementById('result-text').innerText = story;
+    const yes = document.getElementById('stamp-yes');
+    const no = document.getElementById('stamp-no');
+    
+    yes.style.display = 'none';
+    no.style.display = 'none';
+
+    if(isFake) {
+        no.style.display = 'flex';
+        document.body.style.background = "#fab1a0";
+        setTimeout(() => document.body.style.background = "#f0f0f0", 500);
+    } else {
+        yes.style.display = 'flex';
+    }
+}
+</script>
+
+
+
+<!-- БЛОК 8: БИБЛИОТЕКА (ПЕРЕРАБОТАННАЯ) -->
+<section id="library-final" style="position: relative; padding: 80px 5%; background: #fdfaf0; min-height: 120vh; color: #5d4037; font-family: 'Georgia', serif; border-top: 10px solid #8b4513; display: flex; flex-direction: column; align-items: center; overflow: hidden;">
+    
+    <!-- 1. ТЕКСТ ПЕРЕД ИНТЕРАКТИВОМ -->
+    <div style="text-align: center; max-width: 850px; margin-bottom: 60px; z-index: 10;">
+        <h2 style="font-size: 42px; color: #8b4513; text-transform: uppercase; letter-spacing: 5px; margin-bottom: 30px;">Святилище Тишины</h2>
+        <div style="background: rgba(255,255,255,0.6); padding: 35px; border-radius: 15px; border-left: 8px solid #d4af37; text-align: left; line-height: 1.8; box-shadow: 15px 15px 30px rgba(0,0,0,0.05);">
+            <p>Библиотека — это не просто склад бумаги, это место силы. Здесь, за старыми дубовыми столами, решались судьбы великих ученых и писателей. Каждый шорох страницы здесь кажется громом, а взгляд Марии Ивановны — судом высшей инстанции. Говорят, что она знает содержание каждой из десяти тысяч книг в этом зале наизусть.</p>
+            <p style="margin-top: 15px;">Твоя цель — <b>Золотая Книга Знаний</b>. Она не выдается по абонементу, её нельзя просто взять с полки. Её нужно заслужить. Помни: Библиотекарь ценит терпение, вежливость и искреннюю жажду знаний. Один неверный шаг — и ты окажешься за дверью, так и не коснувшись сияющих страниц.</p>
+        </div>
+    </div>
+
+    <!-- 2. ИНТЕРАКТИВНАЯ ЗОНА -->
+    <div style="display: flex; gap: 40px; align-items: center; justify-content: center; max-width: 1000px; width: 100%;">
+        
+        <div id="lib-desk" style="position: relative; width: 600px; background: #e2ccb0; padding: 40px; border-radius: 20px; border: 5px solid #8b4513; box-shadow: 0 20px 40px rgba(0,0,0,0.2); text-align: center;">
+            <!-- ПЕРСОНАЖ -->
+            <div id="lib-character" style="position: relative; width: 140px; height: 160px; margin: 0 auto 30px;">
+                <div style="width: 100px; height: 100px; background: #ffe0bd; border-radius: 50%; margin: 0 auto; border: 4px solid #5d4037; position: relative;">
+                    <div style="position: absolute; top: 40px; left: 15px; width: 25px; height: 15px; border: 2px solid #000; border-radius: 3px;"></div>
+                    <div style="position: absolute; top: 40px; right: 15px; width: 25px; height: 15px; border: 2px solid #000; border-radius: 3px;"></div>
+                    <div id="mouth" style="position: absolute; bottom: 20px; left: 35px; width: 30px; height: 3px; background: #000;"></div>
+                </div>
+                <div style="width: 140px; height: 60px; background: #2c3e50; border-radius: 30px 30px 0 0; margin-top: -10px;"></div>
+            </div>
+
+            <div id="speech" style="background: #fff; padding: 25px; border-radius: 15px; border: 2px solid #8b4513; font-weight: bold; margin-bottom: 30px; min-height: 50px;">
+                "Хм... Опять этот шум. Ты зачем здесь, деточка?"
+            </div>
+
+            <div id="choices-box" style="display: flex; flex-direction: column; gap: 12px; text-align: left;">
+                <!-- Кнопки -->
+            </div>
+
+            <!-- РУКА С КНИГОЙ (ПОЯВЛЯЕТСЯ В КОНЦЕ) -->
+            <div id="prize-hand" style="position: absolute; bottom: -80px; left: 50%; transform: translateX(-50%); transition: 1s; opacity: 0; pointer-events: none;">
+                <span style="font-size: 80px;">🖐️</span>
+                <div id="golden-book-item" style="width: 100px; height: 140px; background: #d4af37; border: 3px solid #fff; position: absolute; top: -60px; left: 10px; box-shadow: 0 0 30px #d4af37; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #fff;">GOLD</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+(function() {
+    let currentStep = 'start';
+    const speech = document.getElementById('speech');
+    const choices = document.getElementById('choices-box');
+    const hand = document.getElementById('prize-hand');
+
+    const scenario = {
+        start: {
+            txt: "Хм... Опять этот шум. Ты зачем здесь, деточка?",
+            opts: [
+                {t: "Здравствуйте, Мария Ивановна. Простите за беспокойство.", next: 'polite'},
+                {t: "Да я просто... книгу одну ищу. Вроде Золотой.", next: 'suspicious'}
+            ]
+        },
+        polite: {
+            txt: "Ох, хоть кто-то в этой школе знает слово 'здравствуйте'. Что ищем?",
+            opts: [
+                {t: "Я слышал, у вас есть редкая Золотая Книга Знаний...", next: 'test1'},
+                {t: "Мне бы учебник по химии, а то взорвал всё случайно.", next: 'angry'}
+            ]
+        },
+        suspicious: {
+            txt: "Золотую? Ишь какой быстрый. А формуляр у тебя в порядке? Небось долги с прошлого года?",
+            opts: [
+                {t: "Всё сдано в срок! Проверьте, пожалуйста.", next: 'test1'},
+                {t: "Ой, я кажется забыл его дома...", next: 'angry'}
+            ]
+        },
+        test1: {
+            txt: "Ну допустим. А знаешь ли ты, что книги любят тишину и... как звали автора 'Евгения Онегина'?",
+            opts: [
+                {t: "Александр Сергеевич Пушкин, конечно.", next: 'test2'},
+                {t: "Э-э-э... Лермонтов? Или Гоголь?", next: 'angry'}
+            ]
+        },
+        test2: {
+            txt: "Верно. А сколько страниц ты прочитал за прошлый месяц? Только честно!",
+            opts: [
+                {t: "Целых три тома классики! Не мог оторваться.", next: 'final'},
+                {t: "Ну... полторы страницы инструкции к игре.", next: 'angry'}
+            ]
+        },
+        angry: {
+            txt: "Я ТАК И ЗНАЛА! Никакой культуры! Иди гуляй, пока я директора не позвала!",
+            opts: [{t: "Попробовать зайти еще раз (тихо)...", next: 'start'}]
+        }
+    };
+
+    function render(id) {
+        const step = scenario[id];
+        speech.innerText = step.txt;
+        choices.innerHTML = "";
+        
+        step.opts.forEach(o => {
+            const b = document.createElement('button');
+            b.innerText = o.t;
+            b.style.cssText = "padding:15px; border:2px solid #8b4513; background:#fff; cursor:pointer; font-family:serif; transition:0.3s;";
+            b.onmouseover = () => b.style.background = "#fdfaf0";
+            b.onclick = () => {
+                if(o.next === 'final') win();
+                else render(o.next);
+            };
+            choices.appendChild(b);
+        });
+    }
+
+    function win() {
+        speech.innerText = "Ну ладно... Вижу, что ты не безнадежен. Держи, под столом храню для лучших учеников.";
+        choices.innerHTML = "<b style='color:#27ae60; font-size:20px;'>КНИГА ПОЛУЧЕНА!</b>";
+        hand.style.opacity = "1";
+        hand.style.bottom = "20px";
+        localStorage.setItem('has_golden_book', 'true');
+    }
+
+    render('start');
+})();
+</script>
+
+<!-- БЛОК 9: ГЛОБАЛЬНЫЙ ТЕСТ (ПОЛНАЯ ВЕРСИЯ) -->
+<section id="final-exam-ultra" style="position: relative; padding: 80px 5%; background: #fdfdfd; min-height: 150vh; display: flex; flex-direction: column; align-items: center; border-top: 10px solid #2980b9; font-family: 'Arial', sans-serif; user-select: none;">
+    
+    <div style="text-align: center; max-width: 800px; margin-bottom: 40px;">
+        <h2 style="font-family: serif; font-size: 36px; color: #2c3e50; text-transform: uppercase; letter-spacing: 2px;">Итоговая Аттестация</h2>
+        <p style="font-style: italic; color: #7f8c8d;">Впишите ответы. Учитель проверит работу красной ручкой.</p>
+    </div>
+
+    <!-- БЛАНК ТЕСТА -->
+    <div id="test-sheet" style="background: #fff; padding: 50px; border: 2px solid #ccc; box-shadow: 0 20px 50px rgba(0,0,0,0.1); width: 100%; max-width: 800px; position: relative; transition: 0.5s;">
+        
+        <div id="questions-list" style="line-height: 2.2; font-size: 16px; color: #333;">
+            <b style="color: #2980b9;">МАТЕМАТИКА:</b><br>
+            1. 9 x 7 = <input type="text" id="ex1" style="width:50px; border:none; border-bottom:1px solid #999;"> <br>
+            2. Корень из 144? <input type="text" id="ex2" style="width:50px; border:none; border-bottom:1px solid #999;"> <br>
+            3. 15% от 200? <input type="text" id="ex3" style="width:50px; border:none; border-bottom:1px solid #999;"> <br>
+            
+            <b style="color: #2980b9; display:block; margin-top:15px;">РУССКИЙ ЯЗЫК:</b>
+            4. Вставь букву: Пр..вительство <input type="text" id="ex4" style="width:30px; border:none; border-bottom:1px solid #999;"> <br>
+            5. Вставь букву: Искренн..сть <input type="text" id="ex5" style="width:30px; border:none; border-bottom:1px solid #999;"> <br>
+            6. Слово с ошибкой (А или Б)? А: Жызнь, Б: Жизнь <input type="text" id="ex6" style="width:30px; border:none; border-bottom:1px solid #999;"> <br>
+
+            <b style="color: #2980b9; display:block; margin-top:15px;">ГЕОГРАФИЯ:</b>
+            7. Самая длинная река мира? <input type="text" id="ex7" style="width:120px; border:none; border-bottom:1px solid #999;"> <br>
+            8. Столица Германии? <input type="text" id="ex8" style="width:120px; border:none; border-bottom:1px solid #999;"> <br>
+            9. В какой стране находится Париж? <input type="text" id="ex9" style="width:100px; border:none; border-bottom:1px solid #999;"> <br>
+
+            <b style="color: #2980b9; display:block; margin-top:15px;">ОБЩИЕ ЗНАНИЯ:</b>
+            10. Сколько часов в сутках? <input type="text" id="ex10" style="width:50px; border:none; border-bottom:1px solid #999;"> <br>
+            11. Кто открыл закон гравитации? <input type="text" id="ex11" style="width:120px; border:none; border-bottom:1px solid #999;"> <br>
+            12. Назовите спутник Земли? <input type="text" id="ex12" style="width:100px; border:none; border-bottom:1px solid #999;"> <br>
+            13. Выберите А, Б или В: 2+2*2 это... (А: 8, Б: 6, В: 4) <input type="text" id="ex13" style="width:30px; border:none; border-bottom:1px solid #999;"> <br>
+
+            <b style="color: #c0392b; display:block; margin-top:25px;">14. МИНИ-СОЧИНЕНИЕ "КАК Я ПРОВЕЛА ЛЕТО":</b>
+            <textarea id="essay-box" placeholder="Напишите не менее 5 слов..." style="width:100%; height:80px; border:1px solid #ddd; padding:10px; font-family:serif; font-size:16px;"></textarea>
+
+            <b style="color: #c0392b; display:block; margin-top:20px;">15. ТВОЯ ГЛАВНАЯ МЕЧТА:</b>
+            <input type="text" id="dream-box" placeholder="Я хочу стать..." style="width:100%; border:none; border-bottom:2px solid #333; font-size:18px;">
+        </div>
+
+        <button onclick="gradeWork()" style="margin-top: 40px; width: 100%; padding: 20px; background: #2c3e50; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 18px; transition: 0.3s;">СДАТЬ РАБОТУ</button>
+
+        <!-- МЕСТО ДЛЯ ОЦЕНКИ -->
+        <div id="stamp-container" style="position: absolute; top: 50px; right: 50px; opacity: 0; transform: rotate(15deg) scale(2); transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); pointer-events: none; text-align: center; z-index: 100;">
+            <div id="stamp-num" style="font-size: 140px; font-weight: 900; line-height: 1;">5</div>
+            <div id="stamp-txt" style="font-size: 14px; font-weight: bold; width: 180px; background: #fff;"></div>
+        </div>
+    </div>
+</section>
+
+<script>
+function gradeWork() {
+    const answers = {
+        ex1:'63', ex2:'12', ex3:'30', ex4:'а', ex5:'о', ex6:'а',
+        ex7:['амазонка', 'нил'], ex8:'берлин', ex9:'франция', 
+        ex10:'24', ex11:'ньютон', ex12:'луна', ex13:'б'
+    };
+
+    let score = 0;
+    
+    // Проверка базы (зачеркивание)
+    for(let id in answers) {
+        let input = document.getElementById(id);
+        let val = input.value.toLowerCase().trim();
+        let isCorrect = Array.isArray(answers[id]) ? answers[id].includes(val) : val === answers[id];
+
+        if(isCorrect) {
+            score++;
+            input.style.color = "#27ae60";
+            input.style.fontWeight = "bold";
+        } else {
+            input.style.textDecoration = "line-through red";
+            input.style.color = "red";
+            let correctHint = document.createElement('span');
+            correctHint.innerHTML = ` <small style="color:red; font-weight:bold;">(${Array.isArray(answers[id]) ? answers[id][0] : answers[id]})</small>`;
+            input.parentNode.insertBefore(correctHint, input.nextSibling);
+        }
+    }
+
+    // Детектор Хейта (Сочинение и Мечта)
+    const essay = document.getElementById('essay-box').value.toLowerCase();
+    const dream = document.getElementById('dream-box').value.toLowerCase();
+    const toxicWords = ['бомб', 'взрыв', 'ненавижу', 'плох', 'разруш', 'убить', 'смерть', 'сжечь'];
+    let isToxic = toxicWords.some(word => essay.includes(word) || dream.includes(word));
+
+    const stampContainer = document.getElementById('stamp-container');
+    const stampNum = document.getElementById('stamp-num');
+    const stampTxt = document.getElementById('stamp-txt');
+    const sheet = document.getElementById('test-sheet');
+
+    // Оценка
+    stampContainer.style.opacity = "1";
+    stampContainer.style.transform = "rotate(15deg) scale(1)";
+
+    if (isToxic) {
+        stampNum.innerText = "!"; 
+        stampNum.style.color = "#000";
+        stampTxt.innerHTML = "<span style='color:red'>К ПСИХОЛОГУ!</span><br>Недопустимый контент. Вызов родителей!";
+        sheet.style.border = "10px solid red";
+        sheet.style.background = "#fffafa";
+    } else {
+        // Считаем сочинение (минимум 5 слов)
+        if(essay.split(' ').filter(w => w.length > 0).length >= 5) score++;
+        if(dream.length > 3) score++;
+
+        if(score >= 14) { 
+            stampNum.innerText = "5"; stampNum.style.color = "#27ae60"; 
+            stampTxt.innerText = "ОТЛИЧНО! ГОРДОСТЬ ШКОЛЫ!";
+        } else if(score >= 11) { 
+            stampNum.innerText = "4"; stampNum.style.color = "#2980b9";
+            stampTxt.innerText = "ХОРОШО. ЕСТЬ ОШИБКИ.";
+        } else if(score >= 7) {
+            stampNum.innerText = "3"; stampNum.style.color = "#f39c12";
+            stampTxt.innerText = "УДОВЛЕТВОРИТЕЛЬНО. СТАРАЙСЯ!";
+        } else if(score >= 4) {
+            stampNum.innerText = "2"; stampNum.style.color = "#d63031";
+            stampTxt.innerText = "УЖАСНО! ПЕРЕСДАТЬ!";
+        } else {
+            stampNum.innerText = "1"; stampNum.style.color = "#000";
+            stampTxt.innerText = "КОЛ! РОДИТЕЛЕЙ К ШКОЛЕ!";
+        }
+    }
+}
+</script>
+
+
+<!-- БЛОК 10: ТЕСТ НА ПРОФЕССИЮ -->
+<section id="career-test" style="position: relative; padding: 80px 5%; background: #ffffff; min-height: 100vh; display: flex; flex-direction: column; align-items: center; border-top: 10px solid #34495e; font-family: 'Segoe UI', sans-serif;">
+    
+    <div style="text-align: center; max-width: 800px; margin-bottom: 50px;">
+        <h2 style="font-size: 36px; color: #2c3e50; text-transform: uppercase; letter-spacing: 3px;">Профориентация: Кто ты?</h2>
+        <p style="color: #7f8c8d; font-style: italic;">Ответь на вопросы честно, чтобы Оракул определил твой путь после школы.</p>
+    </div>
+
+    <!-- КОНТЕЙНЕР ТЕСТА -->
+    <div id="career-quiz" style="background: #f9f9f9; padding: 40px; border-radius: 20px; border: 2px solid #eee; width: 100%; max-width: 700px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+        <div id="q-header" style="font-weight: bold; font-size: 20px; margin-bottom: 30px; color: #34495e;">Вопрос 1 из 10</div>
+        <p id="q-text" style="font-size: 18px; margin-bottom: 30px;">Что тебе больше всего нравится делать на переменах?</p>
+        
+        <div id="q-options" style="display: flex; flex-direction: column; gap: 15px;">
+            <!-- Кнопки вставляются через JS -->
+        </div>
+    </div>
+
+    <!-- РЕЗУЛЬТАТЫ -->
+    <div id="career-result" style="display: none; text-align: center; max-width: 700px; animation: fadeIn 1s;">
+        <h3 style="font-size: 32px; color: #27ae60;">ТВОЙ ИДЕАЛЬНЫЙ ПУТЬ:</h3>
+        <div id="career-list" style="font-size: 24px; font-weight: bold; margin: 20px 0; color: #2c3e50;"></div>
+        <p id="career-desc" style="line-height: 1.8; color: #636e72; background: #f1f2f6; padding: 25px; border-radius: 15px; border-left: 5px solid #27ae60;"></p>
+    </div>
+</section>
+
+<script>
+(function() {
+    const quizData = [
+        { q: "Что тебе больше всего нравится делать на переменах?", 
+          o: [{t: "Рисовать в тетрадке", s:"art"}, {t: "Обсуждать новости с друзьями", s:"comm"}, {t: "Разбирать ручку или гаджет", s:"tech"}, {t: "Планировать следующий урок", s:"lead"}] },
+        { q: "Твой любимый предмет в школе?", 
+          o: [{t: "Литература / Изо", s:"art"}, {t: "Обществознание", s:"comm"}, {t: "Информатика / Физика", s:"tech"}, {t: "История", s:"lead"}] },
+        { q: "Если в классе спор, ты...", 
+          o: [{t: "Придумаешь творческий компромисс", s:"art"}, {t: "Будешь долго всех мирить", s:"comm"}, {t: "Проанализируешь факты", s:"tech"}, {t: "Возьмешь лидерство и всех рассудишь", s:"lead"}] },
+        { q: "Кем ты видишь себя через 10 лет?", 
+          o: [{t: "Создателем чего-то красивого", s:"art"}, {t: "Помогающим людям", s:"comm"}, {t: "Работающим с кодом или чертежами", s:"tech"}, {t: "Главой большой компании", s:"lead"}] },
+        { q: "Твое идеальное рабочее место?", 
+          o: [{t: "Светлая студия", s:"art"}, {t: "Офис, полный людей", s:"comm"}, {t: "Тихая лаборатория", s:"tech"}, {t: "Кабинет на верхнем этаже", s:"lead"}] }
+        // Добавь еще 5 по аналогии для полноты (я сократил для примера, но структура ясна)
+    ];
+
+    let currentQ = 0;
+    let scores = { art: 0, comm: 0, tech: 0, lead: 0 };
+
+    function renderQ() {
+        const data = quizData[currentQ];
+        document.getElementById('q-header').innerText = `Вопрос ${currentQ + 1} из ${quizData.length}`;
+        document.getElementById('q-text').innerText = data.q;
+        const opts = document.getElementById('q-options');
+        opts.innerHTML = "";
+
+        data.o.forEach(opt => {
+            const b = document.createElement('button');
+            b.innerText = opt.t;
+            b.style.cssText = "padding:15px; border:2px solid #ddd; background:#fff; border-radius:10px; cursor:pointer; text-align:left; font-size:16px; transition:0.2s;";
+            b.onmouseover = () => b.style.borderColor = "#34495e";
+            b.onclick = () => {
+                scores[opt.s]++;
+                currentQ++;
+                if(currentQ < quizData.length) renderQ();
+                else showResult();
+            };
+            opts.appendChild(b);
+        });
+    }
+
+    function showResult() {
+        document.getElementById('career-quiz').style.display = 'none';
+        const res = document.getElementById('career-result');
+        const winner = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+
+        const results = {
+            art: { n: "Архитектор Вселенных / Дизайнер", d: "Твое воображение не знает границ. Ты видишь мир иначе, чем другие. Твои профессии: Арт-директор, Геймдизайнер, Архитектор будущего." },
+            comm: { n: "Психолог / Дипломат / Продюсер", d: "Ты чувствуешь людей и умеешь управлять эмоциями. Ты станешь тем, кто объединяет миллионы. Твои профессии: HR-директор, Медиа-магнат, Посол доброй воли." },
+            tech: { n: "Инженер данных / Робототехник", d: "Твой мозг — это мощный процессор. Ты создашь технологии, которые изменят быт людей. Твои профессии: Разработчик ИИ, Биоинженер, Космический техник." },
+            lead: { n: "Топ-менеджер / Визионер", d: "Ты рождена управлять процессами и вести за собой. Ты не боишься ответственности. Твои профессии: CEO корпорации, Политический лидер, Основатель стартапов." }
+        };
+
+        document.getElementById('career-list').innerText = results[winner].n;
+        document.getElementById('career-desc').innerText = results[winner].d;
+        res.style.display = 'block';
+    }
+
+    renderQ();
+})();
+</script>
+
+
+
+<!-- БЛОК 11: ПОСЛЕДНИЙ ЗВОНОК -->
+<section id="last-bell" style="position: relative; width: 100%; min-height: 100vh; background: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; border-top: 10px solid #d4af37;">
+    
+    <div style="text-align: center; z-index: 10; margin-bottom: 50px;">
+        <h2 style="font-size: 45px; color: #333; text-transform: uppercase; letter-spacing: 5px;">Последний Звонок</h2>
+        <p style="font-style: italic; color: #888; font-size: 20px;">Нажми на колокольчик, чтобы выпустить воспоминания!</p>
+    </div>
+
+    <!-- КОЛОКОЛЬЧИК -->
+    <div id="bell-wrap" onclick="ringBell()" style="position: relative; cursor: pointer; z-index: 100;">
+        <div id="bell" style="font-size: 150px; transition: 0.2s; display: inline-block;">🔔</div>
+        <div style="position: absolute; top: 0; right: -20px; font-size: 60px; color: red;">🎀</div>
+    </div>
+
+    <div id="final-stats" style="margin-top: 50px; text-align: center; color: #333; font-weight: bold; z-index: 10;">
+        Школа окончена. Твоя история — это твои поступки.
+    </div>
+
+    <!-- КАНВАС ДЛЯ ВЫЛЕТАЮЩИХ ВЕЩЕЙ -->
+    <canvas id="memoryCanvas" style="position: absolute; inset: 0; pointer-events: none; z-index: 50;"></canvas>
+
+    <style>
+        @keyframes ring { 0% { transform: rotate(0); } 25% { transform: rotate(20deg); } 75% { transform: rotate(-20deg); } 100% { transform: rotate(0); } }
+        .ringing { animation: ring 0.4s infinite; }
+    </style>
+</section>
+
+<script>
+let items = [];
+const mCanvas = document.getElementById('memoryCanvas');
+const mCtx = mCanvas.getContext('2d');
+
+function ringBell() {
+    const bell = document.getElementById('bell');
+    bell.classList.add('ringing');
+    
+    // Генерируем "вылетающие воспоминания"
+    const types = ['🍎', '🍕', '🌭', '📚', '👟', '5', '2', '📖', '🧪'];
+    for(let i=0; i<15; i++) {
+        items.push({
+            x: window.innerWidth / 2,
+            y: window.innerHeight / 2 + 50,
+            vx: (Math.random() - 0.5) * 20,
+            vy: (Math.random() - 1) * 20,
+            char: types[Math.floor(Math.random() * types.length)],
+            size: Math.random() * 30 + 20,
+            rot: Math.random() * 360,
+            vRot: (Math.random() - 0.5) * 10
+        });
+    }
+
+    setTimeout(() => {
+        bell.classList.remove('ringing');
+    }, 2000);
+}
+
+function animateMemories() {
+    mCanvas.width = window.innerWidth;
+    mCanvas.height = window.innerHeight;
+    mCtx.clearRect(0, 0, mCanvas.width, mCanvas.height);
+
+    items.forEach((item, index) => {
+        item.x += item.vx;
+        item.y += item.vy;
+        item.vy += 0.5; // Гравитация
+        item.rot += item.vRot;
+
+        mCtx.save();
+        mCtx.translate(item.x, item.y);
+        mCtx.rotate(item.rot * Math.PI / 180);
+        mCtx.font = item.size + "px Arial";
+        mCtx.fillText(item.char, 0, 0);
+        mCtx.restore();
+
+        if (item.y > mCanvas.height) items.splice(index, 1);
+    });
+    requestAnimationFrame(animateMemories);
+}
+animateMemories();
+</script>
